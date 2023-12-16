@@ -1,6 +1,10 @@
+import Header from "../components/Header"
+
 function BrowsePage(){
     return(
-        <div>Browse</div>
+        <div>
+            <Header></Header>
+        </div>
     )
 }
 

@@ -2,14 +2,14 @@ import { useRef, useState } from "react"
 import Header from "../components/Header"
 import {FaEye,FaEyeSlash} from "react-icons/fa" 
 import { checkValidData } from "../utils/validateData"
-import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
+import {updateProfile,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
 import { auth } from "../utils/firebase"
+import { useNavigate } from "react-router-dom"
+import { useDispatch } from "react-redux"
+import { addUser } from "../utils/userDetailsSlice"
 
 function LoginPage(){
-
-    const showPasswordEye=<FaEye className="absolute right-3 top-7 text-lg cursor-pointer" onClick={(e)=>setShowPassword(!showPassword)}></FaEye>
-    const hidePassWordEye=<FaEyeSlash className="absolute right-3 top-7 text-lg cursor-pointer" onClick={(e)=>setShowPassword(!showPassword)} ></FaEyeSlash>
-
+    
     const [showPassword,setShowPassword]=useState(false)
     const [isSignUp,setIsSignUp]=useState(false)
     const [errorMsg,setErrorMsg]=useState(null)
@@ -17,7 +17,13 @@ function LoginPage(){
     const nameRef=useRef()
     const emailRef=useRef()
     const passwordRef=useRef()
-   
+
+    const navigate=useNavigate()
+    const dispatch=useDispatch()
+
+    const showPasswordEye=<FaEye className="absolute right-3 top-7 text-lg cursor-pointer" onClick={(e)=>setShowPassword(!showPassword)}></FaEye>
+    const hidePassWordEye=<FaEyeSlash className="absolute right-3 top-7 text-lg cursor-pointer" onClick={(e)=>setShowPassword(!showPassword)} ></FaEyeSlash>
+
     function toggleSignUp(){
         setIsSignUp(!isSignUp)
     }
@@ -33,7 +39,17 @@ function LoginPage(){
             //If user is doing sign up
             createUserWithEmailAndPassword(auth,emailRef.current.value,passwordRef.current.value).then(
                 (user)=>{
-                    console.log(user)
+                    updateProfile(auth.currentUser, {
+                        displayName: nameRef.current.value
+                      }).then(() => {
+                        // Profile updated!
+                        const {email,uid,displayName}=auth.currentUser
+                        dispatch(addUser({email,uid,displayName}))
+                        navigate("/browse")
+                      }).catch((error) => {
+                        // An error occurred
+                        setErrorMsg(error.message)
+                      });
                 }
             ).catch(
                 (error)=>{
@@ -45,7 +61,7 @@ function LoginPage(){
             //if user is doing login process
             signInWithEmailAndPassword(auth,emailRef.current.value,passwordRef.current.value).then(
                 (user)=>{
-                    console.log(user)
+                    navigate('/browse')
                 }
             ).catch(
                 (error)=>{
