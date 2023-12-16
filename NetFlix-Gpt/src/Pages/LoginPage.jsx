@@ -2,6 +2,8 @@ import { useRef, useState } from "react"
 import Header from "../components/Header"
 import {FaEye,FaEyeSlash} from "react-icons/fa" 
 import { checkValidData } from "../utils/validateData"
+import {createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
+import { auth } from "../utils/firebase"
 
 function LoginPage(){
 
@@ -24,6 +26,33 @@ function LoginPage(){
         e.preventDefault()
         const message=checkValidData(nameRef.current?.value,emailRef.current.value,passwordRef.current.value,isSignUp)
         setErrorMsg(message)
+
+        if(message) return
+
+        if(isSignUp){
+            //If user is doing sign up
+            createUserWithEmailAndPassword(auth,emailRef.current.value,passwordRef.current.value).then(
+                (user)=>{
+                    console.log(user)
+                }
+            ).catch(
+                (error)=>{
+                    setErrorMsg(error.message)
+                }
+            )
+        }
+        else{
+            //if user is doing login process
+            signInWithEmailAndPassword(auth,emailRef.current.value,passwordRef.current.value).then(
+                (user)=>{
+                    console.log(user)
+                }
+            ).catch(
+                (error)=>{
+                    setErrorMsg("Invalid Credentials")
+                }
+            )
+        }
     }
 
     return(
