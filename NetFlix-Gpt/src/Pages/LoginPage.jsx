@@ -4,9 +4,9 @@ import {FaEye,FaEyeSlash} from "react-icons/fa"
 import { checkValidData } from "../utils/validateData"
 import {updateProfile,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
 import { auth } from "../utils/firebase"
-import { useNavigate } from "react-router-dom"
 import { useDispatch } from "react-redux"
 import { addUser } from "../utils/userDetailsSlice"
+import {bannerImage,avatarImage} from "../utils/constants"
 
 function LoginPage(){
     
@@ -18,7 +18,6 @@ function LoginPage(){
     const emailRef=useRef()
     const passwordRef=useRef()
 
-    const navigate=useNavigate()
     const dispatch=useDispatch()
 
     const showPasswordEye=<FaEye className="absolute right-3 top-7 text-lg cursor-pointer" onClick={(e)=>setShowPassword(!showPassword)}></FaEye>
@@ -40,12 +39,11 @@ function LoginPage(){
             createUserWithEmailAndPassword(auth,emailRef.current.value,passwordRef.current.value).then(
                 (user)=>{
                     updateProfile(auth.currentUser, {
-                        displayName: nameRef.current.value
+                        displayName: nameRef.current.value,photoURL:avatarImage
                       }).then(() => {
                         // Profile updated!
-                        const {email,uid,displayName}=auth.currentUser
-                        dispatch(addUser({email,uid,displayName}))
-                        navigate("/browse")
+                        const {email,uid,displayName,photoURL}=auth.currentUser
+                        dispatch(addUser({email,uid,displayName,photoURL}))
                       }).catch((error) => {
                         // An error occurred
                         setErrorMsg(error.message)
@@ -61,7 +59,6 @@ function LoginPage(){
             //if user is doing login process
             signInWithEmailAndPassword(auth,emailRef.current.value,passwordRef.current.value).then(
                 (user)=>{
-                    navigate('/browse')
                 }
             ).catch(
                 (error)=>{
@@ -74,7 +71,7 @@ function LoginPage(){
     return(
         <div className="relative">
             <Header></Header>
-            <img src="https://assets.nflxext.com/ffe/siteui/vlv3/ca6a7616-0acb-4bc5-be25-c4deef0419a7/c5af601a-6657-4531-8f82-22e629a3795e/IN-en-20231211-popsignuptwoweeks-perspective_alpha_website_large.jpg" alt="banner-image"></img>
+            <img src={bannerImage} alt="banner-image"></img>
             <div className="absolute top-0 flex justify-center w-[100%] my-40">
             <form className="text-white bg-black bg-opacity-80 w-3/12 flex flex-col px-6 py-8" onSubmit={handleSubmit}>
                 <h1 className="font-bold text-2xl">{isSignUp ? "Sign Up" : "Sign In"}</h1>
