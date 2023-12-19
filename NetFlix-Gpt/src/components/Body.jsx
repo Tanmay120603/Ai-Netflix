@@ -1,11 +1,8 @@
 import {Route,createBrowserRouter,createRoutesFromElements,RouterProvider} from "react-router-dom"
 import RootLayout from "../layout/RootLayout"
 import { LoginPage,BrowsePage } from "../Pages" 
-import { useDispatch } from "react-redux"
 
 function Body(){
-
-    const dispatch=useDispatch()
 
     const appRouter=createBrowserRouter(createRoutesFromElements(
         <Route path="/" element={<RootLayout></RootLayout>}>

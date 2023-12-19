@@ -7,6 +7,7 @@ const apiOptions = {
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJlODU3M2U5MTRiYTE4ZmQ3NWVhOTk2MGVhYzk1NGUwZSIsInN1YiI6IjY1N2ViNjJiMTI0YzhkMDcyZDM5M2FhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.GGvgXr_8PtsdT9UM8ZrnOuwokue98SSaU4xj2M-KvyU'
     }
-  };
+};
+const posterCdnLink="https://image.tmdb.org/t/p/w500"
 
-export {logoImage,bannerImage,avatarImage,apiOptions}
+export {logoImage,bannerImage,avatarImage,apiOptions,posterCdnLink}
