@@ -3,13 +3,14 @@ import MovieTitle from "./MovieTitle"
 import MovieTrailer from "./MovieTrailer"
 
 function MainContainer(){
-    const movies=useSelector((state)=>state.moviesDetails.nowPlayingMovies)
-    if(!movies) return
-    const movie=movies[3]
+    const moviesRelatedData=useSelector((state)=>state.moviesDetails)
+    if(!moviesRelatedData.nowPlayingMovies) return
+    const movie=moviesRelatedData.nowPlayingMovies[3]
+    console.log(moviesRelatedData.nowPlayingMovies[3])
 
     return(
         <div>
-            <MovieTitle {...movie}></MovieTitle>
+            {!moviesRelatedData.mainMoviePlaying && <MovieTitle {...movie}></MovieTitle>}
             <MovieTrailer {...movie}></MovieTrailer>
         </div>
     )

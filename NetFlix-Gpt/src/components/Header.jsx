@@ -12,7 +12,7 @@ function Header(){
     const dispatch=useDispatch()
 
     function handleSignOut(){
-        signOut(auth).then(()=>navigate("/")).catch(error=>console.log(error))
+        signOut(auth).then(()=>{}).catch(error=>console.log(error))
     }
 
     useEffect(()=>{
