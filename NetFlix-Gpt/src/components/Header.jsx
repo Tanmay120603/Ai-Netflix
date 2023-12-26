@@ -3,16 +3,27 @@ import { useDispatch, useSelector } from "react-redux"
 import { auth } from "../utils/firebase"
 import { useNavigate } from "react-router-dom"
 import {addUser,removeUser} from "../utils/userDetailsSlice"
-import { useEffect, useState } from "react"
-import { logoImage } from "../utils/constants"
+import { useEffect} from "react"
+import { logoImage, supportedLanguages } from "../utils/constants"
+import { toggleMainMoviePlaying } from "../utils/moviesSlice"
+import { toggleShowGptSearchPage } from "../utils/gptSearchSlice"
+import { changeLanguage } from "../utils/configSlice"
 
 function Header(){
-    const userDetailsObj=useSelector((state)=>state.userDetailsObj)
+    const {userDetailsObj,gptSearch}=useSelector((state)=>state)
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
     function handleSignOut(){
-        signOut(auth).then(()=>{}).catch(error=>console.log(error))
+        signOut(auth).then(()=>{dispatch(toggleMainMoviePlaying(false))}).catch(error=>alert(error.message))
+    }
+
+    function handleShowGptPage(){
+        dispatch(toggleShowGptSearchPage())
+    }
+
+    function handleLanguageChange(e){
+        dispatch(changeLanguage(e.target.value))
     }
 
     useEffect(()=>{
@@ -34,8 +45,15 @@ function Header(){
 
     return (
         <div className="absolute bg-gradient-to-b from-black w-[100%] flex z-10 justify-between items-center">
-        <img src={logoImage} alt="logo-image" className="w-44"></img>
+        <div className="flex gap-6 items-center"><img src={logoImage} alt="logo-image" className="w-44"></img>
+        {gptSearch.showGptSearch && <select onChange={handleLanguageChange} className=" bg-slate-900 bg-opacity-50 cursor-pointer rounded text-white py-1 px-2">
+            {supportedLanguages.map(language=><option value={language.identifier}>{language.name}</option>)}
+        </select>}
+        </div>
         {userDetailsObj && <div className="flex gap-2 items-center">
+        <button className="text-white bg-purple-800 rounded py-2 px-4 mr-10" onClick={handleShowGptPage}>
+            {gptSearch.showGptSearch ? "Home Page" : "Gpt Search"}
+        </button>
         <img src={userDetailsObj.photoURL} className="w-8 cursor-pointer" alt="avatar-image" />
         <p className="text-white font-mono">{userDetailsObj.displayName}</p>
         <button onClick={handleSignOut} className="cursor-pointer bg-red-500 text-white px-3 py-1 rounded mx-2">Sign Out</button>

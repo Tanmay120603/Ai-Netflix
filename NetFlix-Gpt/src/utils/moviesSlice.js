@@ -27,7 +27,7 @@ const moviesSlice=createSlice({
             state.trailer=action.payload
         },
         toggleMainMoviePlaying:function(state,action){
-            state.mainMoviePlaying=!(state.mainMoviePlaying)
+            state.mainMoviePlaying=action.payload
         }
     }
 })

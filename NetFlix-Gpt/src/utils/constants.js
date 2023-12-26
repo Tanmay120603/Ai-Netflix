@@ -10,4 +10,6 @@ const apiOptions = {
 };
 const posterCdnLink="https://image.tmdb.org/t/p/w500"
 
-export {logoImage,bannerImage,avatarImage,apiOptions,posterCdnLink}
+const supportedLanguages=[{identifier:"en",name:"English"},{identifier:"hindi",name:"Hindi"},{identifier:"chinese",name:"Chinese"}]
+
+export {logoImage,bannerImage,avatarImage,apiOptions,posterCdnLink,supportedLanguages}

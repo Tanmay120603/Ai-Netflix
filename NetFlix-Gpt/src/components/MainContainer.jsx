@@ -6,8 +6,7 @@ function MainContainer(){
     const moviesRelatedData=useSelector((state)=>state.moviesDetails)
     if(!moviesRelatedData.nowPlayingMovies) return
     const movie=moviesRelatedData.nowPlayingMovies[3]
-    console.log(moviesRelatedData.nowPlayingMovies[3])
-
+    
     return(
         <div>
             {!moviesRelatedData.mainMoviePlaying && <MovieTitle {...movie}></MovieTitle>}

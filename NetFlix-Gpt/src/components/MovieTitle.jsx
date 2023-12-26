@@ -8,7 +8,7 @@ function MovieTitle({original_title,overview}){
     const dispatch=useDispatch()
 
     function handlePlay(){
-           dispatch(toggleMainMoviePlaying())
+           dispatch(toggleMainMoviePlaying(true))
     }
 
     return(

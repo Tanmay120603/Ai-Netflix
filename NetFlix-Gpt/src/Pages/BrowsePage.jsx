@@ -1,10 +1,15 @@
+import { useSelector } from "react-redux"
 import Header from "../components/Header"
 import MainContainer from "../components/MainContainer"
 import SecondaryContainer from "../components/SecondaryContainer"
 import useSpecifiedMovies from "../hooks/useSpecifiedMovies"
 import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcomingMovies } from "../utils/moviesSlice"
+import GptSearchPage from "./GptSearchPage"
 
 function BrowsePage(){
+
+    const showGptSearch=useSelector((state)=>state.gptSearch.showGptSearch)
+
     useSpecifiedMovies("https://api.themoviedb.org/3/movie/now_playing?page=1",addNowPlayingMovies)
     useSpecifiedMovies("https://api.themoviedb.org/3/movie/popular?page=1",addPopularMovies)
     useSpecifiedMovies("https://api.themoviedb.org/3/movie/top_rated?page=1",addTopRatedMovies)
@@ -13,8 +18,12 @@ function BrowsePage(){
     return(
         <div>
             <Header></Header>
+            {showGptSearch ? <GptSearchPage></GptSearchPage> 
+            :<>
             <MainContainer></MainContainer>
             <SecondaryContainer></SecondaryContainer>
+            </>
+            }
         </div>
     )
 }
