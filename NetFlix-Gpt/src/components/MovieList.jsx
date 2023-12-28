@@ -1,6 +1,9 @@
 import MovieCard from "./MovieCard"
 
 function MovieList({movies,title}){
+
+    if(movies.length==0)return
+
     return(
         <div className="w-[100%] overflow-x-scroll">
         <h1 className="text-white text-2xl font-mono mb-1">{title}</h1>

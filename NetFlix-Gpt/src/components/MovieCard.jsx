@@ -1,20 +1,21 @@
-import { IoMdCloseCircle, IoMdInformationCircle } from "react-icons/io"
+import { useDispatch } from "react-redux"
 import { posterCdnLink } from "../utils/constants"
-import { useState } from "react"
+import { setPlayingMovie, toggleMainMoviePlaying } from "../utils/moviesSlice"
 
-function MovieCard({poster_path,title,overview}){
+function MovieCard({id,poster_path,title,overview,vote_average,vote_count}){
 
-    const [showInfo,setShowInfo]=useState(false)
+    const dispatch=useDispatch()
 
-    function handleInfo(){
-        setShowInfo(!showInfo)
+    if(!poster_path)return
+
+    function handleMoviePlaying(){
+        dispatch(setPlayingMovie({id,poster_path,title,overview,vote_average,vote_count}))
+        dispatch(toggleMainMoviePlaying(true))
     }
 
     return(
-        <div className="px-1 relative cursor-pointer">
-            {showInfo ? <IoMdCloseCircle onClick={handleInfo} size={20} className="text-white bg-black rounded-3xl z-10 absolute right-1"></IoMdCloseCircle> : <IoMdInformationCircle onClick={handleInfo} size={20} className="text-white z-10 bg-black rounded-3xl absolute right-1"></IoMdInformationCircle>}
+        <div onClick={handleMoviePlaying} className="px-1 relative cursor-pointer transition-transform hover:scale-90">
             <img src={posterCdnLink+poster_path} className="w-40" alt={title} />
-            {showInfo && <p className="absolute h-[100%] pt-5 text-center font-thin top-0 overflow-hidden bg-black text-white bg-opacity-80">{overview}</p>}
         </div>
     )
 }

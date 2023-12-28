@@ -5,21 +5,27 @@ import { useNavigate } from "react-router-dom"
 import {addUser,removeUser} from "../utils/userDetailsSlice"
 import { useEffect} from "react"
 import { logoImage, supportedLanguages } from "../utils/constants"
-import { toggleMainMoviePlaying } from "../utils/moviesSlice"
-import { toggleShowGptSearchPage } from "../utils/gptSearchSlice"
+import { setPlayingMovie, toggleMainMoviePlaying } from "../utils/moviesSlice"
+import { addSuggestedMovieNamesAndResults, toggleShowGptSearchPage } from "../utils/gptSearchSlice"
 import { changeLanguage } from "../utils/configSlice"
+import { IoReturnUpBack } from "react-icons/io5"
 
 function Header(){
-    const {userDetailsObj,gptSearch}=useSelector((state)=>state)
+    const {userDetailsObj,gptSearch,moviesDetails}=useSelector((state)=>state)
     const navigate=useNavigate()
     const dispatch=useDispatch()
 
     function handleSignOut(){
+        if(gptSearch.showGptSearch){
+            dispatch(toggleShowGptSearchPage())
+        }
         signOut(auth).then(()=>{dispatch(toggleMainMoviePlaying(false))}).catch(error=>alert(error.message))
     }
 
     function handleShowGptPage(){
         dispatch(toggleShowGptSearchPage())
+        dispatch(addSuggestedMovieNamesAndResults({suggestedMovieNames:null,suggestedMovieResults:null}))
+        dispatch(changeLanguage("en"))
     }
 
     function handleLanguageChange(e){
@@ -43,11 +49,20 @@ function Header(){
         }
     },[])
 
+    if(moviesDetails.playingMovie){
+        return(
+        <IoReturnUpBack onClick={()=>{
+            dispatch(setPlayingMovie(null))
+            dispatch(toggleMainMoviePlaying(false))
+        }} className="absolute text-white mx-3 my-3 bg-black cursor-pointer" size={40}></IoReturnUpBack>
+        )
+    }
+
     return (
         <div className="absolute bg-gradient-to-b from-black w-[100%] flex z-10 justify-between items-center">
         <div className="flex gap-6 items-center"><img src={logoImage} alt="logo-image" className="w-44"></img>
         {gptSearch.showGptSearch && <select onChange={handleLanguageChange} className=" bg-slate-900 bg-opacity-50 cursor-pointer rounded text-white py-1 px-2">
-            {supportedLanguages.map(language=><option value={language.identifier}>{language.name}</option>)}
+            {supportedLanguages.map(language=><option key={language.identifier} value={language.identifier}>{language.name}</option>)}
         </select>}
         </div>
         {userDetailsObj && <div className="flex gap-2 items-center">
