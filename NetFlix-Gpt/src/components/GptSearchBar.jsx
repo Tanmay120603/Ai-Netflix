@@ -41,8 +41,8 @@ function GptSearchBar(){
 
     return (
         <div className="flex justify-center">
-        <form className="bg-black mt-28 w-[50%] gap-4 p-4 flex">
-            <input type="text" className="w-[80%] p-2 rounded" placeholder={languageTranslate[selectedLang].searchTextFieldPlaceHolder} ref={searchFieldRef} />
+        <form className="bg-black mt-28 w-[90%] md:w-[50%] gap-4 p-4 flex flex-col md:flex-row">
+            <input type="text" className=" w-[100%] md:w-[80%] p-2 rounded" placeholder={languageTranslate[selectedLang].searchTextFieldPlaceHolder} ref={searchFieldRef} />
             <button onClick={handleGptSearch} className="bg-red-700 text-white rounded py-2 px-4">{languageTranslate[selectedLang].search}</button>
         </form>
         </div>
