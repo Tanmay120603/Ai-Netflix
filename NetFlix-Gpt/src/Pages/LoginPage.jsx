@@ -73,7 +73,7 @@ function LoginPage(){
             <Header></Header>
             <img src={bannerImage} className="w-screen h-screen object-cover" alt="banner-image"></img>
             <div className="absolute top-0 flex justify-center w-[100%] my-40">
-            <form className="text-white bg-black bg-opacity-80 w-11/12 md:w-3/12 flex flex-col px-6 py-8" onSubmit={handleSubmit}>
+            <form className="text-white bg-black bg-opacity-80 w-11/12 md:w-6/12 xl:w-3/12 flex flex-col px-6 py-8" onSubmit={handleSubmit}>
                 <h1 className="font-bold text-2xl">{isSignUp ? "Sign Up" : "Sign In"}</h1>
                 {isSignUp && <input ref={nameRef} type="text" className="px-4 py-2 my-4 bg-slate-800" placeholder="Enter your Name" />}
                 <input ref={emailRef} type="text" className="px-4 py-2 my-4 bg-slate-800" placeholder="Enter email address" />
