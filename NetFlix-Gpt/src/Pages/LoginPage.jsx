@@ -5,7 +5,7 @@ import { checkValidData } from "../utils/validateData"
 import {updateProfile,createUserWithEmailAndPassword,signInWithEmailAndPassword} from "firebase/auth"
 import { auth } from "../utils/firebase"
 import { useDispatch } from "react-redux"
-import { addUser } from "../utils/userDetailsSlice"
+import { addUser } from "../store/userDetailsSlice"
 import {bannerImage,avatarImage} from "../utils/constants"
 
 function LoginPage(){

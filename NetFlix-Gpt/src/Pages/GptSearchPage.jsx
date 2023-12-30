@@ -1,5 +1,5 @@
-import GptSearchBar from "../components/GptSearchBar"
-import GptSuggestedList from "../components/GptSuggestedList"
+import GptSearchBar from "../Gpt-Page-Components/GptSearchBar"
+import GptSuggestedList from "../Gpt-Page-Components/GptSuggestedList"
 import { bannerImage } from "../utils/constants"
 
 function GptSearchPage(){

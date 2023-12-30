@@ -1,4 +1,4 @@
-import MovieTrailer from "../components/MovieTrailer"
+import MovieTrailer from "../Reusable-Components/MovieTrailer"
 import PlayingMovieDesc from "../components/PlayingMovieDesc"
 
 function OnPlayingMovie({playingMovieData}){

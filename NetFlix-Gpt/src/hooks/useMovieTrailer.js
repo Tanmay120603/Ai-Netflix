@@ -1,6 +1,6 @@
 import { useEffect } from "react"
 import { useDispatch } from "react-redux"
-import { addTrailer } from "../utils/moviesSlice"
+import { addTrailer } from "../store/moviesSlice"
 import { apiOptions } from "../utils/constants"
 
 

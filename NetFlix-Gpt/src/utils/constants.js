@@ -14,7 +14,7 @@ const posterCdnLink="https://image.tmdb.org/t/p/w500"
 const supportedLanguages=[{identifier:"en",name:"English"},{identifier:"hindi",name:"Hindi"},{identifier:"chinese",name:"Chinese"}]
 
 const openAi=new OpenAi({
-  apiKey:"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",
+  apiKey:"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",
   dangerouslyAllowBrowser:true
 })
 

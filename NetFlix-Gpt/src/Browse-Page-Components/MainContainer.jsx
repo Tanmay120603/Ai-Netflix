@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
 import MovieTitle from "./MovieTitle"
-import MovieTrailer from "./MovieTrailer"
+import MovieTrailer from "../Reusable-Components/MovieTrailer"
 
 function MainContainer(){
     const moviesRelatedData=useSelector((state)=>state.moviesDetails)

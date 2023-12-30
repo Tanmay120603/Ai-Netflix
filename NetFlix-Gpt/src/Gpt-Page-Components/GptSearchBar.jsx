@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { languageTranslate } from "../utils/languageConstants"
 import { useRef } from "react"
 import { apiOptions, openAi } from "../utils/constants"
-import { addSuggestedMovieNamesAndResults, changeIsSearchLoading } from "../utils/gptSearchSlice"
+import { addSuggestedMovieNamesAndResults, changeIsSearchLoading } from "../store/gptSearchSlice"
 
 function GptSearchBar(){
     const selectedLang=useSelector(state=>state.config.lang)

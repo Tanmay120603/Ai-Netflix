@@ -1,4 +1,4 @@
-import MovieCard from "./MovieCard"
+import MovieCard from "../Browse-Page-Components/MovieCard"
 
 function MovieList({movies,title}){
 

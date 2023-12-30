@@ -1,6 +1,6 @@
 import {FaPlay} from "react-icons/fa"
 import {IoMdInformationCircle} from "react-icons/io"
-import { toggleMainMoviePlaying } from "../utils/moviesSlice"
+import { toggleMainMoviePlaying } from "../store/moviesSlice"
 import { useDispatch } from "react-redux"
 
 function MovieTitle({original_title,overview}){

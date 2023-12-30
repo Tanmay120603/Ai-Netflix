@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux"
-import MovieList from "./MovieList"
-import Loader from "./Loader"
+import MovieList from "../Reusable-Components/MovieList"
+import Loader from "../components/Loader"
 
 function GptSuggestedList(){
 

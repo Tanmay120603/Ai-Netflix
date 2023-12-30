@@ -1,9 +1,9 @@
 import { useSelector } from "react-redux"
 import Header from "../components/Header"
-import MainContainer from "../components/MainContainer"
-import SecondaryContainer from "../components/SecondaryContainer"
+import MainContainer from "../Browse-Page-Components/MainContainer"
+import SecondaryContainer from "../Browse-Page-Components/SecondaryContainer"
 import useSpecifiedMovies from "../hooks/useSpecifiedMovies"
-import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcomingMovies } from "../utils/moviesSlice"
+import { addNowPlayingMovies, addPopularMovies, addTopRatedMovies, addUpcomingMovies } from "../store/moviesSlice"
 import GptSearchPage from "./GptSearchPage"
 import OnPlayingMovie from "./OnPlayingMovie"
 

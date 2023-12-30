@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux"
 import { posterCdnLink } from "../utils/constants"
-import { setPlayingMovie, toggleMainMoviePlaying } from "../utils/moviesSlice"
+import { setPlayingMovie, toggleMainMoviePlaying } from "../store/moviesSlice"
 
 function MovieCard({id,poster_path,title,overview,vote_average,vote_count}){
 

@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux"
-import MovieList from "./MovieList"
+import MovieList from "../Reusable-Components/MovieList"
 
 function SecondaryContainer(){
     const moviesDetails=useSelector(state=>state.moviesDetails)
